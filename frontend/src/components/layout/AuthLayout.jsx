@@ -5,7 +5,7 @@ import { useSiteSettings } from '@/context/SiteSettingsContext';
 export default function AuthLayout({ eyebrow, title, subtitle, children, footer }) {
   const { settings } = useSiteSettings();
   return (
-    <div className="luxury-dark min-h-screen bg-noir-radial flex items-center justify-center px-6 py-28">
+    <div className="min-h-screen bg-noir-radial flex items-center justify-center px-6 py-28">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
@@ -13,7 +13,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children, footer 
         className="w-full max-w-md"
       >
         <Link to="/" className="block text-center font-script text-2xl tracking-widest3 uppercase mb-10">
-          <span className="text-gold-sheen">{settings.siteName}</span>
+          <span className="text-gold-sheen">VELVET &amp; VANE</span>
         </Link>
 
         <div className="glass p-8 md:p-10">

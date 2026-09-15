@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,15 +7,15 @@
 html.dark,
 html.light {
   color-scheme: light;
-  --color-background: #F8F5EE;
-  --color-primary: #123C35;
-  --color-dark: #171A18;
-  --color-accent: #C9A45C;
-  --color-text: #252525;
-  --color-text-secondary: #716B61;
+  --color-background: #F8F5EF;
+  --color-primary: #2C2925;
+  --color-dark: #2C2925;
+  --color-accent: #C6A15B;
+  --color-text: #2C2925;
+  --color-text-secondary: #716863;
   --color-card: #FFFFFF;
   --font-heading: "Playfair Display", serif;
-  --font-body: "DM Sans", sans-serif;
+  --font-body: "Montserrat", sans-serif;
   /* Legacy Tailwind token names retained to theme existing components. */
   --c-obsidian: 248 245 238;
   --c-obsidian-light: 255 255 255;
@@ -33,14 +34,14 @@ body {
 
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #123C35, #C9A45C); border-radius: 4px; }
-::selection { background: #123C35; color: #FFFFFF; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #C6A15B, #A97835); border-radius: 4px; }
+::selection { background: #E8DFD1; color: #2C2925; }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible { outline: 2px solid #123C35; outline-offset: 3px; }
+select:focus-visible { outline: 2px solid #C6A15B; outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -120,6 +121,12 @@ select:focus-visible { outline: 2px solid #123C35; outline-offset: 3px; }
 /* Existing CTA utility usage is promoted from gold to primary emerald;
    champagne remains a restrained detail, border, badge, and hover accent. */
 button.bg-gold,
-a.bg-gold { background-color: #123C35; color: #FFFFFF; }
+a.bg-gold { background-color: #C6A15B; color: #FFFFFF; }
 button.bg-gold:hover,
-a.bg-gold:hover { background-color: #0D302A; color: #FFFFFF; }
+a.bg-gold:hover { background-color: #A97835; color: #FFFFFF; }
+
+/* Velvet & Vane's light luxury design system. Existing utility aliases are
+   retained so public commerce flows stay intact while adopting these tokens. */
+:root, html.dark, html.light { --color-ivory:#F8F5EF; --color-soft-white:#FFFDF9; --color-white:#FFFFFF; --color-text:#2C2925; --color-muted:#716863; --color-champagne:#C6A15B; --color-gold-dark:#A97835; --color-beige:#E8DFD1; --color-border:#E5DED3; --font-heading:"Playfair Display",Georgia,serif; --font-body:"Montserrat",Arial,sans-serif; --c-obsidian:248 245 239; --c-obsidian-light:255 255 255; --c-obsidian-lighter:232 223 209; --c-ivory:44 41 37; --c-ivory-dim:113 104 99; }
+body { background:#F8F5EF; color:#2C2925; } ::-webkit-scrollbar-track { background:#F8F5EF; } ::-webkit-scrollbar-thumb { background:#C6A15B; } ::selection { background:#E8DFD1; color:#2C2925; } a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible { outline-color:#C6A15B; }
+.eyebrow { color:#C6A15B; }.heading-display { color:#2C2925; }.text-gold-sheen { background:none; color:#C6A15B; animation:none; }.glass { background:rgba(255,253,249,.96); border-color:#E5DED3; box-shadow:0 12px 30px -28px rgba(44,41,37,.35); backdrop-filter:none; }.hairline { background:#E5DED3; }.luxury-dark,.luxury-dark [class*="text-ivory"],.luxury-dark .text-ivory { color:#2C2925; }.luxury-dark .glass { background:#FFF; border-color:#E5DED3; }button.bg-gold,a.bg-gold { background:#C6A15B; color:#FFF; } button.bg-gold:hover,a.bg-gold:hover { background:#A97835; color:#FFF; }@media (pointer:fine) { .cursor-none-desktop { cursor:auto; } }

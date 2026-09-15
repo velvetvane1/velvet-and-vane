@@ -50,20 +50,20 @@ export default function ProductCard({ product }) {
 
   return (
     <>
-      <div className="group relative flex flex-col bg-obsidian-light border border-gold/20 p-3 transition-[border-color,transform] duration-300 hover:border-gold/50 hover:-translate-y-0.5">
+      <div className="group relative flex flex-col bg-white border border-[#E5DED3] p-3 shadow-[0_12px_28px_-26px_rgba(44,41,37,.5)] transition-[border-color,transform,box-shadow] duration-300 hover:border-gold/60 hover:-translate-y-0.5 hover:shadow-[0_18px_32px_-26px_rgba(44,41,37,.6)]">
         <div
           ref={cardRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ perspective: 900 }}
-          className="relative aspect-[3/4] rounded-sm overflow-hidden"
+            className="relative aspect-[3/4] overflow-hidden bg-[#FFFDF9]"
         >
           <motion.div
             animate={{ rotateX: tilt.rx, rotateY: tilt.ry }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
             style={{
               transformStyle: 'preserve-3d',
-              background: image ? `url(${image}) center/cover no-repeat` : placeholderSwatch(product.name),
+              background: image ? `url(${image}) center/contain no-repeat` : placeholderSwatch(product.name),
             }}
             className="w-full h-full flex items-center justify-center"
           >
@@ -79,7 +79,7 @@ export default function ProductCard({ product }) {
             )}
 
             {onSale && (
-              <span className="absolute top-2.5 left-2.5 z-10 rounded-md border border-white/20 bg-rose-700/90 px-2.5 py-1 text-[10px] font-bold leading-none tracking-wide text-white shadow-lg shadow-black/30 backdrop-blur-[1px]">
+              <span className="absolute top-2.5 left-2.5 z-10 bg-gold-deep px-2.5 py-1 text-[10px] font-semibold leading-none tracking-wide text-white">
                 {product.activeSale.discount}% OFF
               </span>
             )}

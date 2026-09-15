@@ -35,7 +35,7 @@ export default function Shipping() {
       <p>
         Sign in to your account, go to Orders, open the relevant order, and
         use the cancel/return option — or write to us at{' '}
-        <a href="mailto:hello@arwastore.pk">hello@arwastore.pk</a> with your
+        <a href="mailto:hello@velvetandvane.com">hello@velvetandvane.com</a> with your
         order number and we'll take it from there.
       </p>
     </StaticPage>

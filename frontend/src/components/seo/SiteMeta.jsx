@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useSiteSettings } from '@/context/SiteSettingsContext';
 
-const FALLBACK_SITE_NAME = 'Arwa Store';
+const FALLBACK_SITE_NAME = 'VELVET & VANE';
 const STORE_ICON_PATH = '/icons/arwa-icon-512.png';
 
 /** Runtime site-wide metadata sourced from the singleton SiteSettings record. */

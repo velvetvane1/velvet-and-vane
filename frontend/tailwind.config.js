@@ -24,13 +24,13 @@ export default {
           // text-gold, bg-gold, border-gold/40, etc.) but re-valued to the
           // new black + orange identity, so every existing usage updates
           // automatically instead of requiring a find/replace of class names.
-          pale: '#E4D1A7',
-          DEFAULT: '#C9A45C',
-          deep: '#A8813F',
+          pale: '#E8DFD1',
+          DEFAULT: '#C6A15B',
+          deep: '#A97835',
           line: 'rgba(201, 164, 92, 0.35)',
         },
-        primary: '#123C35',
-        charcoal: '#171A18',
+        primary: '#2C2925',
+        charcoal: '#2C2925',
         ember: {
           DEFAULT: '#5B1A1A',
           light: '#7A2A20',
@@ -38,7 +38,7 @@ export default {
       },
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],
-        body: ['"DM Sans"', 'sans-serif'],
+        body: ['"Montserrat"', 'sans-serif'],
         script: ['"Playfair Display"', 'serif'],
       },
       letterSpacing: {
@@ -47,7 +47,7 @@ export default {
       },
       backgroundImage: {
         'gold-sheen': 'linear-gradient(115deg, #A8813F 0%, #E4D1A7 32%, #C9A45C 52%, #F8F5EE 68%, #A8813F 100%)',
-        'noir-radial': 'radial-gradient(circle at 50% 15%, #234F46 0%, #171A18 72%)',
+        'noir-radial': 'radial-gradient(circle at 70% 25%, #FFFDF9 0%, #F8F5EF 62%, #E8DFD1 100%)',
       },
       boxShadow: {
         gold: '0 16px 36px -22px rgba(18,60,53,0.45)',
