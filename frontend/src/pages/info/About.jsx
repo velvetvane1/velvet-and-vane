@@ -5,13 +5,13 @@ export default function About() {
     <StaticPage
       eyebrow="Our Story"
       title="Where Quality Meets Tradition"
-      subtitle="Arwa Store brings together carefully selected products that reflect quality, elegance, and the traditions we value."
-      metaDescription="Discover Arwa Store: thoughtfully selected fashion, fragrances, traditional favourites, and home essentials."
+      subtitle="Velvet & Vane brings together considered fragrances for the rituals, memories, and moments that stay with you."
+      metaDescription="Discover Velvet & Vane, a considered collection of premium fragrances."
       maxWidth="max-w-2xl"
     >
       <h2>Built on Trust</h2>
       <p>
-        Arwa Store was created with a simple vision: to bring quality products
+        Velvet & Vane was created with a simple vision: to bring exceptional fragrances
         together under one trusted name. From fashion and fragrances to natural
         products, traditional favourites, and home essentials, every collection
         is selected with care and a focus on value, authenticity, and lasting
@@ -33,7 +33,7 @@ export default function About() {
         honest service, and an experience that puts our customers first.
       </p>
 
-      <h2>Why Choose Arwa Store</h2>
+      <h2>Why Choose Velvet &amp; Vane</h2>
       <ul>
         <li>Authentic &amp; carefully selected products</li>
         <li>Quality you can trust</li>

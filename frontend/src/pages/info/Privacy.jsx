@@ -35,7 +35,7 @@ export default function Privacy() {
       <p>
         You can access, correct, or delete your account data at any time
         from your account settings, or by writing to{' '}
-        <a href="mailto:hello@arwastore.pk">hello@arwastore.pk</a>.
+        <a href="mailto:hello@velvetandvane.com">hello@velvetandvane.com</a>.
       </p>
     </StaticPage>
   );

@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { siteSettingsApi } from '@/services/siteSettings';
 
 const DEFAULTS = {
-  siteName: 'Store',
+  siteName: 'VELVET & VANE',
   currency: 'PKR',
   whatsapp: {
     number: '+923176346085',
@@ -19,7 +19,7 @@ const DEFAULTS = {
   },
   footerTagline:
     'A carefully curated collection of fashion, fragrances, natural products, traditional favorites, and premium essentials.',
-  contact: { email: 'hello@arwastore.pk', phone: '+92 317 6346085', address: 'Pakistan' },
+  contact: { email: 'hello@velvetandvane.com', phone: '+92 317 6346085', address: 'Pakistan' },
   paymentSettings: {},
 };
 

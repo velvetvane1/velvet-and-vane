@@ -18,13 +18,14 @@ import { categoriesApi } from '@/services/products';
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
-  { label: 'Collections', to: '/shop', hasCategories: true },
+  { label: 'Shop', to: '/shop', hasCategories: true },
+  { label: 'Brands', to: '/brands' },
+  { label: 'Categories', to: '/shop', hasCategories: true },
   { label: 'New Arrivals', to: '/new-arrivals' },
   { label: 'Best Sellers', to: '/best-sellers' },
   { label: 'About Us', to: '/about' },
   { label: 'Contact Us', to: '/contact' },
 ];
-const STORE_LOGO_PATH = '/icons/arwa-icon-512.png';
 
 export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -42,7 +43,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
     `relative font-body text-[11px] tracking-[0.16em] uppercase transition-colors duration-300 after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-px after:bg-gold after:transition-all after:duration-300 ${
       isActive
         ? 'text-gold after:w-full'
-        : 'text-white/85 hover:text-gold after:w-0 hover:after:w-full'
+        : 'text-ivory/80 hover:text-gold after:w-0 hover:after:w-full'
     }`;
 
   const handleLogout = async () => {
@@ -56,7 +57,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-gold/25 bg-primary/95 py-3 text-white shadow-[0_10px_30px_-20px_rgba(18,60,53,0.9)] backdrop-blur-md transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#E5DED3] bg-[#FFFDF9]/95 py-4 text-ivory shadow-[0_8px_28px_-24px_rgba(44,41,37,.45)] backdrop-blur-sm transition-all duration-300">
       <div className="relative mx-auto flex h-9 max-w-[100rem] items-center px-3 sm:px-5 md:px-8 lg:grid lg:h-auto lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-5">
         {/* This control is intentionally mobile-only; desktop always exposes the full nav. */}
         <button
@@ -68,18 +69,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
         </button>
 
         <Link to="/" className="absolute left-1/2 flex -translate-x-1/2 items-center select-none lg:static lg:translate-x-0 lg:pr-2" data-cursor-hover>
-          {!logoFailed ? (
-            <img
-              src={STORE_LOGO_PATH}
-              alt={settings.siteName}
-              className="h-7 w-auto max-w-[5.5rem] shrink-0 object-contain sm:h-8 sm:max-w-[9rem] md:h-9 md:max-w-[11rem] lg:h-10"
-              onError={() => setLogoFailed(true)}
-            />
-          ) : (
-            <span className="font-script text-2xl md:text-3xl tracking-widest3 uppercase text-gold-sheen">
-              {settings.siteName}
-            </span>
-          )}
+          <span className="font-display text-lg sm:text-xl md:text-2xl tracking-[0.16em] uppercase text-ivory whitespace-nowrap">VELVET <i className="font-normal text-gold">&amp;</i> VANE</span>
         </Link>
 
         {/* Desktop nav */}
@@ -115,14 +105,14 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             <div className="hidden shrink-0 items-center gap-1.5 lg:flex lg:gap-2">
               <Link
                 to="/login"
-                className="inline-flex h-8 items-center whitespace-nowrap rounded-md border border-gold/80 bg-primary/20 px-2.5 text-[9px] font-semibold tracking-[0.1em] uppercase text-white transition-colors duration-200 hover:border-gold hover:bg-[#C9A45C] hover:text-primary sm:h-9 sm:px-3 sm:text-[10px]"
+                className="inline-flex h-8 items-center whitespace-nowrap border border-[#E5DED3] bg-white px-2.5 text-[9px] font-semibold tracking-[0.1em] uppercase text-ivory transition-colors duration-200 hover:border-gold hover:text-gold sm:h-9 sm:px-3 sm:text-[10px]"
                 data-cursor-hover
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="inline-flex h-8 items-center whitespace-nowrap rounded-md border border-[#C9A45C] bg-[#C9A45C] px-2.5 text-[9px] font-bold tracking-[0.08em] uppercase text-primary shadow-[0_8px_18px_-12px_rgba(0,0,0,0.75)] transition-colors duration-200 hover:border-[#E4D1A7] hover:bg-[#E4D1A7] sm:h-9 sm:px-3 sm:text-[10px]"
+                className="inline-flex h-8 items-center whitespace-nowrap border border-gold bg-gold px-2.5 text-[9px] font-semibold tracking-[0.08em] uppercase text-white transition-colors duration-200 hover:bg-gold-deep sm:h-9 sm:px-3 sm:text-[10px]"
                 data-cursor-hover
               >
                 Create Account
@@ -199,7 +189,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden glass mt-3 mx-4 rounded-md shadow-glass lg:hidden"
+            className="overflow-hidden glass mt-3 mx-4 shadow-glass lg:hidden"
           >
             <ul className="flex flex-col divide-y divide-gold/10">
               {NAV_LINKS.map((link) => (
@@ -253,7 +243,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-obsidian/95 backdrop-blur-md flex items-start justify-center pt-32 px-6"
+            className="fixed inset-0 z-[60] bg-[#F8F5EF]/95 backdrop-blur-sm flex items-start justify-center pt-32 px-6"
             onClick={() => setSearchOpen(false)}
           >
             <motion.div

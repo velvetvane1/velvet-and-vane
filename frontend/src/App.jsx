@@ -22,12 +22,12 @@ export default function App() {
                   position="bottom-right"
                   toastOptions={{
                     style: {
-                      background: '#171A18',
+                      background: '#2C2925',
                       color: '#FFFFFF',
-                      border: '1px solid rgba(201, 164, 92,0.35)',
+                      border: '1px solid #E5DED3',
                       fontSize: '13px',
                     },
-                    success: { iconTheme: { primary: '#C9A45C', secondary: '#171A18' } },
+                    success: { iconTheme: { primary: '#C6A15B', secondary: '#2C2925' } },
                   }}
                 />
               </WishlistProvider>

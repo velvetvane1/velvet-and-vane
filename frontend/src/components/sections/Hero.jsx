@@ -94,7 +94,7 @@ export default function Hero() {
   return (
     <section
       ref={rootRef}
-      className="luxury-dark relative min-h-screen flex items-center overflow-hidden bg-noir-radial"
+      className="relative min-h-[min(780px,100vh)] flex items-center overflow-hidden bg-noir-radial"
     >
       {/* Ambient gold particles */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
@@ -147,14 +147,14 @@ export default function Hero() {
         {/* Signature visual: real product photo once one exists, generic
             bottle illustration as the fallback until then */}
         <div className="relative flex justify-center items-center">
-          <div className="absolute w-[70%] aspect-square rounded-full bg-gold/10 blur-3xl" aria-hidden="true" />
+          <div className="absolute w-[75%] aspect-square rounded-full bg-[#E8DFD1]/70 blur-3xl" aria-hidden="true" />
 
           {heroImage ? (
             <Link to={`/product/${heroProduct.slug}`} data-cursor-hover className="relative block group">
               <div
                 ref={bottleRef}
-                className="w-64 md:w-80 aspect-square rounded-sm overflow-hidden drop-shadow-gold"
-                style={{ background: `url(${heroImage}) center/cover no-repeat` }}
+                className="w-64 md:w-80 aspect-square overflow-hidden bg-white border border-[#E5DED3] shadow-[0_24px_50px_-38px_rgba(44,41,37,.55)]"
+                style={{ background: `url(${heroImage}) center/contain no-repeat` }}
               />
               <div className="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <p className="text-xs tracking-widest2 uppercase text-gold">{heroProduct.name} →</p>
@@ -182,7 +182,7 @@ export default function Hero() {
                 fill="url(#bottleGrad)"
                 opacity="0.85"
               />
-              <rect x="55" y="150" width="90" height="60" fill="#171A18" opacity="0.35" />
+              <rect x="55" y="150" width="90" height="60" fill="#2C2925" opacity="0.35" />
             </svg>
           )}
         </div>

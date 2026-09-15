@@ -25,7 +25,7 @@ export default function Terms() {
       <p>
         You're responsible for keeping your account password confidential
         and for all activity under your account. Let us know immediately at{' '}
-        <a href="mailto:hello@arwastore.pk">hello@arwastore.pk</a> if you
+        <a href="mailto:hello@velvetandvane.com">hello@velvetandvane.com</a> if you
         suspect unauthorized access.
       </p>
 

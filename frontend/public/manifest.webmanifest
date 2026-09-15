@@ -1,12 +1,12 @@
 {
-  "name": "Arwa Store",
-  "short_name": "Arwa Store",
-  "description": "Shop Arwa Store online.",
+  "name": "VELVET & VANE",
+  "short_name": "VELVET & VANE",
+  "description": "Discover premium fragrances at Velvet & Vane.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#F8F5EE",
-  "theme_color": "#123C35",
+  "theme_color": "#F8F5EF",
   "lang": "en-PK",
   "icons": [
     {
