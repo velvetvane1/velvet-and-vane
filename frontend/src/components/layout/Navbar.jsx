@@ -12,7 +12,6 @@ import {
   HiOutlineMoon,
 } from 'react-icons/hi';
 import { useTheme } from '@/context/ThemeContext';
-import { useSiteSettings } from '@/context/SiteSettingsContext';
 import { useAuth } from '@/context/AuthContext';
 import { categoriesApi } from '@/services/products';
 
@@ -31,16 +30,14 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [logoFailed, setLogoFailed] = useState(false);
   const { isDark, toggleTheme } = useTheme();
-  const { settings } = useSiteSettings();
   const { user, loading, isAuthenticated, logout } = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const isCollectionsRoute = pathname === '/shop' || pathname.startsWith('/product/');
 
   const navLinkClass = (isActive) =>
-    `relative font-body text-[11px] tracking-[0.16em] uppercase transition-colors duration-300 after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-px after:bg-gold after:transition-all after:duration-300 ${
+    `relative inline-flex items-center font-body text-[10px] font-medium tracking-[0.1em] uppercase leading-none transition-colors duration-300 after:content-[''] after:absolute after:-bottom-2 after:left-0 after:h-px after:bg-gold after:transition-[width] after:duration-300 ${
       isActive
         ? 'text-gold after:w-full'
         : 'text-ivory/80 hover:text-gold after:w-0 hover:after:w-full'
@@ -57,23 +54,23 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#E5DED3] bg-[#FFFDF9]/95 py-4 text-ivory shadow-[0_8px_28px_-24px_rgba(44,41,37,.45)] backdrop-blur-sm transition-all duration-300">
-      <div className="relative mx-auto flex h-9 max-w-[100rem] items-center px-3 sm:px-5 md:px-8 lg:grid lg:h-auto lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-5">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#E5DED3] bg-[#FFFDF9]/95 text-ivory shadow-[0_8px_28px_-24px_rgba(44,41,37,.45)] backdrop-blur-sm transition-all duration-300">
+      <div className="relative mx-auto flex h-16 max-w-[100rem] items-center px-4 sm:px-6 xl:grid xl:h-[76px] xl:grid-cols-[190px_minmax(0,1fr)_auto] xl:gap-x-7 xl:px-8 2xl:px-10">
         {/* This control is intentionally mobile-only; desktop always exposes the full nav. */}
         <button
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-gold/35 text-lg text-gold transition-colors duration-200 hover:border-gold hover:bg-gold/10 hover:text-gold-pale lg:hidden"
+          className="flex h-9 w-9 shrink-0 items-center justify-center border border-gold/35 text-lg text-ivory transition-colors duration-200 hover:border-gold hover:bg-gold/10 hover:text-gold xl:hidden"
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((v) => !v)}
         >
           {mobileOpen ? <HiOutlineX /> : <HiOutlineMenu />}
         </button>
 
-        <Link to="/" className="absolute left-1/2 flex -translate-x-1/2 items-center select-none lg:static lg:translate-x-0 lg:pr-2" data-cursor-hover>
-          <span className="font-display text-lg sm:text-xl md:text-2xl tracking-[0.16em] uppercase text-ivory whitespace-nowrap">VELVET <i className="font-normal text-gold">&amp;</i> VANE</span>
+        <Link to="/" className="absolute left-1/2 flex -translate-x-1/2 items-center select-none xl:static xl:translate-x-0 xl:justify-self-start" data-cursor-hover>
+          <span className="font-display text-lg tracking-[0.13em] uppercase text-ivory whitespace-nowrap sm:text-xl xl:text-[1.3rem]">VELVET <i className="font-normal text-gold">&amp;</i> VANE</span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden min-w-0 self-center lg:flex items-center justify-self-center whitespace-nowrap gap-2.5 xl:gap-4 2xl:gap-6">
+        <nav aria-label="Primary navigation" className="hidden min-w-0 items-center justify-self-center whitespace-nowrap xl:flex xl:gap-4 2xl:gap-5">
           {NAV_LINKS.map((link) => (
             <div key={link.label} className="relative group">
               <NavLink
@@ -100,9 +97,9 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
           ))}
         </nav>
 
-        <div className="ml-auto flex min-w-0 items-center gap-1.5 text-lg sm:gap-2 sm:text-xl lg:ml-0 lg:justify-self-end lg:gap-3 lg:text-lg">
+        <div className="ml-auto flex min-w-0 items-center text-lg sm:gap-3 sm:text-xl xl:ml-0 xl:justify-self-end xl:gap-4 xl:text-[1.15rem]">
           {!loading && !isAuthenticated && (
-            <div className="hidden shrink-0 items-center gap-1.5 lg:flex lg:gap-2">
+            <div className="hidden shrink-0 items-center gap-2 xl:flex">
               <Link
                 to="/login"
                 className="inline-flex h-8 items-center whitespace-nowrap border border-[#E5DED3] bg-white px-2.5 text-[9px] font-semibold tracking-[0.1em] uppercase text-ivory transition-colors duration-200 hover:border-gold hover:text-gold sm:h-9 sm:px-3 sm:text-[10px]"
@@ -130,7 +127,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             </button>
             <button
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="hidden lg:inline-flex items-center hover:text-gold transition-colors"
+              className="hidden xl:inline-flex items-center hover:text-gold transition-colors"
               data-cursor-hover
               onClick={toggleTheme}
             >
@@ -140,7 +137,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             <Link
               to={isAuthenticated ? '/account' : '/login'}
               aria-label={isAuthenticated ? 'My account' : 'Sign in'}
-              className="inline-flex shrink-0 items-center hover:text-gold transition-colors lg:hidden"
+              className="inline-flex shrink-0 items-center hover:text-gold transition-colors xl:hidden"
               data-cursor-hover
             >
               <HiOutlineUser />
@@ -148,13 +145,13 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
           )}
           {isAuthenticated ? (
             <>
-              <Link to="/account" aria-label="My account" className="hidden shrink-0 items-center hover:text-gold transition-colors lg:inline-flex" data-cursor-hover>
+              <Link to="/account" aria-label="My account" className="hidden shrink-0 items-center hover:text-gold transition-colors xl:inline-flex" data-cursor-hover>
                 <HiOutlineUser />
               </Link>
               <Link
                 to="/account"
                 title={user?.name}
-                className="hidden xl:block max-w-28 truncate text-xs tracking-wide hover:text-gold transition-colors"
+                className="hidden xl:block max-w-28 truncate text-[11px] tracking-wide hover:text-gold transition-colors"
                 data-cursor-hover
               >
                 {user?.name}
@@ -162,7 +159,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="hidden xl:block shrink-0 text-xs tracking-wide hover:text-gold transition-colors"
+                className="hidden xl:block shrink-0 text-[11px] tracking-wide hover:text-gold transition-colors"
                 data-cursor-hover
               >
                 Logout
@@ -189,7 +186,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden glass mt-3 mx-4 shadow-glass lg:hidden"
+            className="overflow-hidden glass mt-3 mx-4 shadow-glass xl:hidden"
           >
             <ul className="flex flex-col divide-y divide-gold/10">
               {NAV_LINKS.map((link) => (

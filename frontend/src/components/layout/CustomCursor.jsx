@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from 'react';
  */
 export default function CustomCursor() {
   const ringRef = useRef(null);
-  const dotRef = useRef(null);
   const [enabled, setEnabled] = useState(false);
   const [hovering, setHovering] = useState(false);
 
@@ -29,9 +28,6 @@ export default function CustomCursor() {
     const onMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
-      }
     };
 
     const onOver = (e) => {
@@ -72,11 +68,6 @@ export default function CustomCursor() {
           height: hovering ? 52 : 32,
           borderColor: hovering ? '#E4D1A7' : 'rgba(201, 164, 92, 0.65)',
         }}
-      />
-      <div
-        ref={dotRef}
-        aria-hidden="true"
-        className="pointer-events-none fixed top-0 left-0 z-[100] w-1.5 h-1.5 rounded-full bg-gold"
       />
     </>
   );
