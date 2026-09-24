@@ -17,7 +17,7 @@ export function PageLoader() {
             cy="32"
             r="28"
             fill="none"
-            stroke="rgba(201, 164, 92, 0.28)"
+            stroke="rgba(201, 164, 108, 0.28)"
             strokeWidth="1"
           />
           <motion.circle
@@ -25,7 +25,7 @@ export function PageLoader() {
             cy="32"
             r="28"
             fill="none"
-            stroke="#C9A45C"
+            stroke="#C9A46C"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeDasharray="60 120"

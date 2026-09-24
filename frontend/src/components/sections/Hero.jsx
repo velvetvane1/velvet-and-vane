@@ -117,7 +117,7 @@ export default function Hero() {
         {/* Copy */}
         <div>
           <p className="hero-eyebrow eyebrow mb-6">{settings.hero.eyebrow}</p>
-          <h1 className="font-display font-light leading-[0.95] text-[13vw] sm:text-6xl md:text-7xl lg:text-[5.2rem]">
+          <h1 className="font-display font-light leading-[0.95] text-primary text-[13vw] sm:text-6xl md:text-7xl lg:text-[5.2rem]">
             <span className="hero-line block overflow-hidden">{settings.hero.titleLine1}</span>
             <span className="hero-line block overflow-hidden text-gold-sheen italic">{settings.hero.titleLine2}</span>
             <span className="hero-line block overflow-hidden">{settings.hero.titleLine3}</span>
@@ -132,7 +132,7 @@ export default function Hero() {
               className="hero-cta group relative px-9 py-4 text-xs tracking-widest2 uppercase bg-gold text-obsidian font-semibold overflow-hidden"
             >
               <span className="relative z-10">Discover the Collection</span>
-              <span className="absolute inset-0 bg-gold-pale translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+              <span className="absolute inset-0 bg-[#7A1833] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
             </Link>
             <Link
               to="/shop"
@@ -147,13 +147,13 @@ export default function Hero() {
         {/* Signature visual: real product photo once one exists, generic
             bottle illustration as the fallback until then */}
         <div className="relative flex justify-center items-center">
-          <div className="absolute w-[75%] aspect-square rounded-full bg-[#E8DFD1]/70 blur-3xl" aria-hidden="true" />
+          <div className="absolute w-[75%] aspect-square rounded-full bg-[#E8DCCB]/70 blur-3xl" aria-hidden="true" />
 
           {heroImage ? (
             <Link to={`/product/${heroProduct.slug}`} data-cursor-hover className="relative block group">
               <div
                 ref={bottleRef}
-                className="w-64 md:w-80 aspect-square overflow-hidden bg-white border border-[#E5DED3] shadow-[0_24px_50px_-38px_rgba(44,41,37,.55)]"
+                className="w-64 md:w-80 aspect-square overflow-hidden bg-white border border-[#E8DCCB] shadow-[0_24px_50px_-38px_rgba(25,21,23,.35)]"
                 style={{ background: `url(${heroImage}) center/contain no-repeat` }}
               />
               <div className="mt-4 text-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -170,9 +170,9 @@ export default function Hero() {
             >
               <defs>
                 <linearGradient id="bottleGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#E4D1A7" />
-                  <stop offset="50%" stopColor="#C9A45C" />
-                  <stop offset="100%" stopColor="#A8813F" />
+                  <stop offset="0%" stopColor="#E8DCCB" />
+                  <stop offset="50%" stopColor="#C9A46C" />
+                  <stop offset="100%" stopColor="#A98456" />
                 </linearGradient>
               </defs>
               <rect x="70" y="20" width="60" height="36" rx="4" fill="url(#bottleGrad)" opacity="0.9" />
@@ -182,7 +182,7 @@ export default function Hero() {
                 fill="url(#bottleGrad)"
                 opacity="0.85"
               />
-              <rect x="55" y="150" width="90" height="60" fill="#2C2925" opacity="0.35" />
+              <rect x="55" y="150" width="90" height="60" fill="#5A0F24" opacity="0.55" />
             </svg>
           )}
         </div>

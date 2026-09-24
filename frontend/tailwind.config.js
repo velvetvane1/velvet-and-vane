@@ -20,20 +20,17 @@ export default {
           dim: 'rgb(var(--c-ivory-dim) / <alpha-value>)',
         },
         gold: {
-          // Token kept as "gold" (referenced ~500 times across the app as
-          // text-gold, bg-gold, border-gold/40, etc.) but re-valued to the
-          // new black + orange identity, so every existing usage updates
-          // automatically instead of requiring a find/replace of class names.
-          pale: '#E8DFD1',
-          DEFAULT: '#C6A15B',
-          deep: '#A97835',
-          line: 'rgba(201, 164, 92, 0.35)',
+          // Champagne accent with burgundy deep state for existing utilities.
+          pale: '#E8DCCB',
+          DEFAULT: '#C9A46C',
+          deep: '#7A1833',
+          line: 'rgba(201, 164, 108, 0.35)',
         },
-        primary: '#2C2925',
-        charcoal: '#2C2925',
+        primary: '#5A0F24',
+        charcoal: '#191517',
         ember: {
-          DEFAULT: '#5B1A1A',
-          light: '#7A2A20',
+          DEFAULT: '#5A0F24',
+          light: '#7A1833',
         },
       },
       fontFamily: {
@@ -46,12 +43,12 @@ export default {
         widest3: '0.5em',
       },
       backgroundImage: {
-        'gold-sheen': 'linear-gradient(115deg, #A8813F 0%, #E4D1A7 32%, #C9A45C 52%, #F8F5EE 68%, #A8813F 100%)',
-        'noir-radial': 'radial-gradient(circle at 70% 25%, #FFFDF9 0%, #F8F5EF 62%, #E8DFD1 100%)',
+        'gold-sheen': 'linear-gradient(115deg, #5A0F24 0%, #7A1833 52%, #5A0F24 100%)',
+        'noir-radial': 'radial-gradient(circle at 70% 25%, #FFFFFF 0%, #F7F1E8 62%, #E8DCCB 100%)',
       },
       boxShadow: {
-        gold: '0 16px 36px -22px rgba(18,60,53,0.45)',
-        glass: '0 12px 30px -24px rgba(23,26,24,0.35)',
+        gold: '0 16px 36px -22px rgba(90,15,36,0.22)',
+        glass: '0 12px 30px -24px rgba(25,21,23,0.25)',
       },
       backdropBlur: {
         xs: '2px',

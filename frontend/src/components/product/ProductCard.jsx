@@ -50,13 +50,13 @@ export default function ProductCard({ product }) {
 
   return (
     <>
-      <div className="group relative flex flex-col bg-white border border-[#E5DED3] p-3 shadow-[0_12px_28px_-26px_rgba(44,41,37,.5)] transition-[border-color,transform,box-shadow] duration-300 hover:border-gold/60 hover:-translate-y-0.5 hover:shadow-[0_18px_32px_-26px_rgba(44,41,37,.6)]">
+      <div className="group relative flex flex-col bg-white border border-[#E8DCCB] p-3 shadow-[0_12px_28px_-26px_rgba(25,21,23,.3)] transition-[border-color,transform,box-shadow] duration-300 hover:border-gold/60 hover:-translate-y-0.5 hover:shadow-[0_18px_32px_-26px_rgba(25,21,23,.4)]">
         <div
           ref={cardRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           style={{ perspective: 900 }}
-            className="relative aspect-[3/4] overflow-hidden bg-[#FFFDF9]"
+            className="relative aspect-[3/4] overflow-hidden bg-[#F7F1E8]"
         >
           <motion.div
             animate={{ rotateX: tilt.rx, rotateY: tilt.ry }}
@@ -69,10 +69,10 @@ export default function ProductCard({ product }) {
           >
             {!image && (
               <svg viewBox="0 0 100 170" className="w-16 opacity-90" style={{ transform: 'translateZ(40px)' }} aria-hidden="true">
-                <rect x="35" y="10" width="30" height="18" rx="2" fill="#171A18" opacity="0.55" />
+                <rect x="35" y="10" width="30" height="18" rx="2" fill="#191517" opacity="0.55" />
                 <path
                   d="M28 28 Q28 46 24 60 L24 150 Q24 160 34 160 L66 160 Q76 160 76 150 L76 60 Q72 46 72 28 Z"
-                  fill="#171A18"
+                  fill="#191517"
                   opacity="0.45"
                 />
               </svg>
