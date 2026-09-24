@@ -84,7 +84,7 @@ export default function Cart() {
                   style={{
                     background: item.image
                       ? `url(${item.image}) center/cover no-repeat`
-                      : 'linear-gradient(155deg,#171A18,#C9A45C)',
+                      : 'linear-gradient(155deg,#191517,#7A1833)',
                   }}
                 />
                 <div className="flex-1 min-w-0">

@@ -54,7 +54,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#E5DED3] bg-[#FFFDF9]/95 text-ivory shadow-[0_8px_28px_-24px_rgba(44,41,37,.45)] backdrop-blur-sm transition-all duration-300">
+    <header className="site-header fixed top-0 left-0 right-0 z-50 border-b border-gold/30 bg-primary text-ivory shadow-[0_8px_28px_-24px_rgba(25,21,23,.45)] transition-all duration-300">
       <div className="relative mx-auto flex h-16 max-w-[100rem] items-center px-4 sm:px-6 xl:grid xl:h-[76px] xl:grid-cols-[190px_minmax(0,1fr)_auto] xl:gap-x-7 xl:px-8 2xl:px-10">
         {/* This control is intentionally mobile-only; desktop always exposes the full nav. */}
         <button
@@ -102,7 +102,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             <div className="hidden shrink-0 items-center gap-2 xl:flex">
               <Link
                 to="/login"
-                className="inline-flex h-8 items-center whitespace-nowrap border border-[#E5DED3] bg-white px-2.5 text-[9px] font-semibold tracking-[0.1em] uppercase text-ivory transition-colors duration-200 hover:border-gold hover:text-gold sm:h-9 sm:px-3 sm:text-[10px]"
+                className="inline-flex h-8 items-center whitespace-nowrap border border-gold/50 bg-transparent px-2.5 text-[9px] font-semibold tracking-[0.1em] uppercase text-ivory transition-colors duration-200 hover:border-gold hover:text-gold sm:h-9 sm:px-3 sm:text-[10px]"
                 data-cursor-hover
               >
                 Login
@@ -186,7 +186,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden glass mt-3 mx-4 shadow-glass xl:hidden"
+            className="overflow-hidden mt-3 mx-4 border border-gold/25 bg-primary shadow-glass xl:hidden"
           >
             <ul className="flex flex-col divide-y divide-gold/10">
               {NAV_LINKS.map((link) => (
@@ -240,7 +240,7 @@ export default function Navbar({ cartCount = 0, wishlistCount = 0 }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-[#F8F5EF]/95 backdrop-blur-sm flex items-start justify-center pt-32 px-6"
+            className="fixed inset-0 z-[60] bg-[#F7F1E8]/95 backdrop-blur-sm flex items-start justify-center pt-32 px-6"
             onClick={() => setSearchOpen(false)}
           >
             <motion.div

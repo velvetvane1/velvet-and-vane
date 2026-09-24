@@ -1,11 +1,11 @@
 const PALETTE = [
-  ['#2C2925', '#C6A15B'],
-  ['#716863', '#E8DFD1'],
-  ['#252525', '#C9A45C'],
-  ['#3B2F2A', '#A8813F'],
-  ['#2E3934', '#C9A45C'],
-  ['#2C2925', '#E8DFD1'],
-  ['#716863', '#C6A15B'],
+  ['#5A0F24', '#C9A46C'],
+  ['#191517', '#E8DCCB'],
+  ['#7A1833', '#C9A46C'],
+  ['#3B1822', '#A98456'],
+  ['#33242A', '#C9A46C'],
+  ['#5A0F24', '#E8DCCB'],
+  ['#191517', '#C9A46C'],
 ];
 
 /** Simple deterministic string hash, used so the same product always

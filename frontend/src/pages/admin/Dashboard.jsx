@@ -92,17 +92,17 @@ export default function AdminDashboard() {
             <AreaChart data={salesByDay}>
               <defs>
                 <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#123C35" stopOpacity={0.5} />
-                  <stop offset="100%" stopColor="#123C35" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#5A0F24" stopOpacity={0.5} />
+                  <stop offset="100%" stopColor="#5A0F24" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid stroke="rgba(201, 164, 92, 0.18)" vertical={false} />
+              <CartesianGrid stroke="rgba(201, 164, 108, 0.24)" vertical={false} />
               <XAxis dataKey="_id" tick={{ fill: '#8a8477', fontSize: 11 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fill: '#8a8477', fontSize: 11 }} axisLine={false} tickLine={false} />
               <Tooltip
-                contentStyle={{ background: '#FFFFFF', border: '1px solid rgba(201, 164, 92, 0.45)', color: '#252525', fontSize: 12 }}
+                contentStyle={{ background: '#FFFFFF', border: '1px solid rgba(201, 164, 108, 0.45)', color: '#191517', fontSize: 12 }}
               />
-              <Area type="monotone" dataKey="revenue" stroke="#123C35" strokeWidth={2} fill="url(#goldFill)" />
+              <Area type="monotone" dataKey="revenue" stroke="#5A0F24" strokeWidth={2} fill="url(#goldFill)" />
             </AreaChart>
           </ResponsiveContainer>
         </div>
@@ -121,9 +121,9 @@ export default function AdminDashboard() {
                 tickLine={false}
               />
               <Tooltip
-                contentStyle={{ background: '#FFFFFF', border: '1px solid rgba(201, 164, 92, 0.45)', color: '#252525', fontSize: 12 }}
+                contentStyle={{ background: '#FFFFFF', border: '1px solid rgba(201, 164, 108, 0.45)', color: '#191517', fontSize: 12 }}
               />
-              <Bar dataKey="unitsSold" fill="#123C35" radius={[0, 3, 3, 0]} />
+              <Bar dataKey="unitsSold" fill="#7A1833" radius={[0, 3, 3, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

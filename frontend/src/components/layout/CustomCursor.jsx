@@ -66,7 +66,7 @@ export default function CustomCursor() {
         style={{
           width: hovering ? 52 : 32,
           height: hovering ? 52 : 32,
-          borderColor: hovering ? '#E4D1A7' : 'rgba(201, 164, 92, 0.65)',
+          borderColor: hovering ? '#C9A46C' : 'rgba(201, 164, 108, 0.65)',
         }}
       />
     </>

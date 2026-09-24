@@ -65,7 +65,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#E8DFD1] border-t border-[#E5DED3] mt-32 text-ivory">
+    <footer className="site-footer relative bg-primary border-t border-gold/30 mt-32 text-ivory">
       <div className="hairline absolute -top-px left-0 right-0" />
 
       {/* Newsletter */}

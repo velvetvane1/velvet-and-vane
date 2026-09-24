@@ -7,21 +7,29 @@
 html.dark,
 html.light {
   color-scheme: light;
-  --color-background: #F8F5EF;
-  --color-primary: #2C2925;
-  --color-dark: #2C2925;
-  --color-accent: #C6A15B;
-  --color-text: #2C2925;
+  --color-burgundy: #5A0F24;
+  --color-burgundy-rich: #7A1833;
+  --color-champagne: #C9A46C;
+  --color-ivory: #F7F1E8;
+  --color-beige: #E8DCCB;
+  --color-charcoal: #191517;
+  --color-white: #FFFFFF;
+  --color-background: var(--color-ivory);
+  --color-primary: var(--color-burgundy);
+  --color-dark: var(--color-charcoal);
+  --color-accent: var(--color-champagne);
+  --color-text: var(--color-charcoal);
   --color-text-secondary: #716863;
-  --color-card: #FFFFFF;
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Montserrat", sans-serif;
-  /* Legacy Tailwind token names retained to theme existing components. */
-  --c-obsidian: 248 245 238;
+  --color-card: var(--color-white);
+  --color-border: var(--color-beige);
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Montserrat", Arial, sans-serif;
+  /* Shared legacy aliases keep existing components and admin flows intact. */
+  --c-obsidian: 247 241 232;
   --c-obsidian-light: 255 255 255;
-  --c-obsidian-lighter: 240 235 225;
-  --c-ivory: 37 37 37;
-  --c-ivory-dim: 113 107 97;
+  --c-obsidian-lighter: 232 220 203;
+  --c-ivory: 25 21 23;
+  --c-ivory-dim: 113 104 99;
 }
 
 * { box-sizing: border-box; }
@@ -33,15 +41,15 @@ body {
 }
 
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #C6A15B, #A97835); border-radius: 4px; }
-::selection { background: #E8DFD1; color: #2C2925; }
+::-webkit-scrollbar-track { background: var(--color-ivory); }
+::-webkit-scrollbar-thumb { background: var(--color-burgundy); border-radius: 4px; }
+::selection { background: var(--color-beige); color: var(--color-charcoal); }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible { outline: 2px solid #C6A15B; outline-offset: 3px; }
+select:focus-visible { outline: 2px solid var(--color-champagne); outline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -52,40 +60,29 @@ select:focus-visible { outline: 2px solid #C6A15B; outline-offset: 3px; }
   }
 }
 
-.eyebrow { @apply font-body text-[11px] tracking-widest2 uppercase text-gold/90; }
-.heading-display { @apply font-display font-medium; }
+.eyebrow { @apply font-body text-[11px] tracking-widest2 uppercase; color: var(--color-burgundy-rich); }
+.heading-display { @apply font-display font-medium; color: var(--color-burgundy); }
 
 .glass {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(16px) saturate(120%);
-  -webkit-backdrop-filter: blur(16px) saturate(120%);
-  border: 1px solid rgba(201, 164, 92, 0.3);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(232, 220, 203, 0.9);
+  box-shadow: 0 12px 30px -28px rgba(25, 21, 23, 0.35);
 }
 
-.text-gold-sheen {
-  background: linear-gradient(115deg, #A8813F 0%, #E4D1A7 30%, #C9A45C 50%, #F8F5EE 65%, #A8813F 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 4.5s linear infinite;
-}
-@keyframes shimmer { to { background-position: 200% center; } }
-
-.hairline { height: 1px; background: linear-gradient(90deg, transparent, rgba(201, 164, 92, 0.6), transparent); }
+.text-gold-sheen { color: var(--color-burgundy-rich); }
+.hairline { height: 1px; background: linear-gradient(90deg, transparent, rgba(201, 164, 108, 0.65), transparent); }
 @media (pointer: fine) { .cursor-none-desktop { cursor: none; } }
 
 .flash-sale-swiper .swiper-button-next,
 .flash-sale-swiper .swiper-button-prev,
 .reviews-swiper .swiper-button-next,
 .reviews-swiper .swiper-button-prev {
-  color: #C9A45C;
+  color: var(--color-burgundy);
   width: 36px;
   height: 36px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(201, 164, 92, 0.45);
+  background: rgba(247, 241, 232, 0.96);
+  border: 1px solid rgba(201, 164, 108, 0.55);
   border-radius: 9999px;
-  backdrop-filter: blur(6px);
 }
 .flash-sale-swiper .swiper-button-next::after,
 .flash-sale-swiper .swiper-button-prev::after,
@@ -94,39 +91,50 @@ select:focus-visible { outline: 2px solid #C6A15B; outline-offset: 3px; }
 
 .prose-content h2 { @apply font-display text-2xl mt-10 mb-4 text-primary; }
 .prose-content h2:first-child { @apply mt-0; }
-.prose-content h3 { @apply font-body text-sm tracking-widest2 uppercase text-gold/90 mt-8 mb-3; }
+.prose-content h3 { @apply font-body text-sm tracking-widest2 uppercase text-gold mt-8 mb-3; }
 .prose-content p { @apply text-ivory/70 leading-relaxed mb-4; }
 .prose-content ul { @apply list-disc list-outside pl-5 space-y-2 text-ivory/70 mb-4; }
 .prose-content a { @apply text-primary hover:underline; }
 .prose-content strong { @apply text-ivory font-semibold; }
 
-.skeleton { position: relative; overflow: hidden; background: rgba(201, 164, 92, 0.12); }
+.skeleton { position: relative; overflow: hidden; background: rgba(232, 220, 203, 0.55); }
 .skeleton::after {
   content: '';
   position: absolute;
   inset: 0;
   transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(201, 164, 92, 0.22), transparent);
+  background: linear-gradient(90deg, transparent, rgba(201, 164, 108, 0.18), transparent);
   animation: skeletonSweep 1.6s infinite;
 }
 @keyframes skeletonSweep { 100% { transform: translateX(100%); } }
 
-/* Dark editorial panels retain accessible white type while the rest of the
-   storefront uses the warm ivory canvas. */
-.luxury-dark { color: #FFFFFF; }
-.luxury-dark [class*="text-ivory"] { color: rgba(255, 255, 255, 0.82); }
-.luxury-dark .text-ivory { color: #FFFFFF; }
-.luxury-dark .glass { background: rgba(23, 26, 24, 0.72); border-color: rgba(201, 164, 92, 0.28); }
+.luxury-dark {
+  color: var(--color-ivory);
+  background-color: var(--color-burgundy);
+  --c-obsidian: 90 15 36;
+  --c-obsidian-light: 122 24 51;
+  --c-obsidian-lighter: 122 24 51;
+  --c-ivory: 247 241 232;
+  --c-ivory-dim: 232 220 203;
+}
+.luxury-dark .heading-display { color: var(--color-ivory); }
+.luxury-dark .glass { background: rgba(25, 21, 23, 0.88); border-color: rgba(201, 164, 108, 0.28); }
+.luxury-dark .bg-noir-radial { background-image: radial-gradient(circle at 70% 25%, #7A1833 0%, #5A0F24 58%, #191517 100%); }
 
-/* Existing CTA utility usage is promoted from gold to primary emerald;
-   champagne remains a restrained detail, border, badge, and hover accent. */
+/* Legacy gold action utilities are kept as burgundy primary buttons; the
+   gold itself remains available for restrained details and accents. */
 button.bg-gold,
-a.bg-gold { background-color: #C6A15B; color: #FFFFFF; }
+a.bg-gold { background-color: var(--color-burgundy); color: var(--color-ivory); }
 button.bg-gold:hover,
-a.bg-gold:hover { background-color: #A97835; color: #FFFFFF; }
+a.bg-gold:hover { background-color: var(--color-burgundy-rich); color: var(--color-ivory); }
 
-/* Velvet & Vane's light luxury design system. Existing utility aliases are
-   retained so public commerce flows stay intact while adopting these tokens. */
-:root, html.dark, html.light { --color-ivory:#F8F5EF; --color-soft-white:#FFFDF9; --color-white:#FFFFFF; --color-text:#2C2925; --color-muted:#716863; --color-champagne:#C6A15B; --color-gold-dark:#A97835; --color-beige:#E8DFD1; --color-border:#E5DED3; --font-heading:"Playfair Display",Georgia,serif; --font-body:"Montserrat",Arial,sans-serif; --c-obsidian:248 245 239; --c-obsidian-light:255 255 255; --c-obsidian-lighter:232 223 209; --c-ivory:44 41 37; --c-ivory-dim:113 104 99; }
-body { background:#F8F5EF; color:#2C2925; } ::-webkit-scrollbar-track { background:#F8F5EF; } ::-webkit-scrollbar-thumb { background:#C6A15B; } ::selection { background:#E8DFD1; color:#2C2925; } a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible { outline-color:#C6A15B; }
-.eyebrow { color:#C6A15B; }.heading-display { color:#2C2925; }.text-gold-sheen { background:none; color:#C6A15B; animation:none; }.glass { background:rgba(255,253,249,.96); border-color:#E5DED3; box-shadow:0 12px 30px -28px rgba(44,41,37,.35); backdrop-filter:none; }.hairline { background:#E5DED3; }.luxury-dark,.luxury-dark [class*="text-ivory"],.luxury-dark .text-ivory { color:#2C2925; }.luxury-dark .glass { background:#FFF; border-color:#E5DED3; }button.bg-gold,a.bg-gold { background:#C6A15B; color:#FFF; } button.bg-gold:hover,a.bg-gold:hover { background:#A97835; color:#FFF; }@media (pointer:fine) { .cursor-none-desktop { cursor:auto; } }
+.site-header {
+  --c-ivory: 247 241 232;
+  --c-ivory-dim: 232 220 203;
+}
+.site-footer {
+  --c-ivory: 247 241 232;
+  --c-ivory-dim: 232 220 203;
+  color: var(--color-ivory);
+}
+.site-footer .eyebrow { color: var(--color-champagne); }
