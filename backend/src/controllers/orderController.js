@@ -105,7 +105,12 @@ function snapshotAddress(addr) {
 }
 
 export const createOrder = asyncHandler(async (req, res) => {
-  const { shippingAddressId, billingAddressId, paymentMethod, stripePaymentIntentId, transactionId, checkoutRating, subscribe } = req.body;
+  const { shippingAddressId, billingAddressId, paymentMethod, stripePaymentIntentId, transactionId, checkoutRating, subscribe, checkoutRequestId } = req.body;
+  if (paymentMethod === 'cod' && checkoutRequestId) {
+    const existingOrder = await Order.findOne({ user: req.user._id, paymentMethod: 'cod', checkoutRequestId });
+    if (existingOrder) return res.status(200).json({ success: true, order: existingOrder });
+  }
+  const codAdvancePercentage = paymentMethod === 'cod' ? (await SiteSettings.getSingleton()).codAdvancePercentage || 20 : null;
 
   if (paymentMethod === 'stripe' && !stripePaymentIntentId) {
     throw ApiError.badRequest('Missing payment confirmation for card payment');
@@ -183,12 +188,13 @@ export const createOrder = asyncHandler(async (req, res) => {
     }
     order = await Order.create({
       orderNumber: generateOrderNumber(),
+      checkoutRequestId: paymentMethod === 'cod' ? checkoutRequestId : null,
       user: req.user._id,
       items: orderItems,
       shippingAddress: snapshotAddress(shippingAddress),
       billingAddress: snapshotAddress(billingAddress),
       paymentMethod,
-      paymentStatus: paymentIntentStatus === 'succeeded' ? 'paid' : ['jazzcash', 'easypaisa'].includes(paymentMethod) ? 'submitted' : 'pending',
+      paymentStatus: paymentIntentStatus === 'succeeded' ? 'paid' : ['jazzcash', 'easypaisa'].includes(paymentMethod) ? 'submitted' : paymentMethod === 'cod' ? 'advance_pending' : 'pending',
       paymentProvider: ['jazzcash', 'easypaisa'].includes(paymentMethod) ? paymentMethod : null,
       transactionId: ['jazzcash', 'easypaisa'].includes(paymentMethod) ? transactionId.trim() : null,
       stripePaymentIntentId: stripePaymentIntentId || null,
@@ -196,6 +202,10 @@ export const createOrder = asyncHandler(async (req, res) => {
       discount,
       shippingCost,
       total,
+      ...(paymentMethod === 'cod' ? (() => {
+        const advanceAmount = Math.round(total * codAdvancePercentage) / 100;
+        return { advancePercentage: codAdvancePercentage, advanceAmount, remainingAmount: total - advanceAmount, advancePaymentStatus: 'pending' };
+      })() : {}),
       couponCode: cart.coupon?.code || null,
       checkoutRating: Number(checkoutRating),
       subscribedAtCheckout: Boolean(subscribe),
@@ -218,8 +228,8 @@ export const createOrder = asyncHandler(async (req, res) => {
   await Notification.create({
     user: req.user._id,
     type: 'order',
-    title: 'Order placed',
-    message: `Your order #${order.orderNumber} has been received and is being prepared.`,
+    title: paymentMethod === 'cod' ? 'Advance payment required' : 'Order placed',
+    message: paymentMethod === 'cod' ? `Pay the COD advance for order #${order.orderNumber} to confirm it.` : `Your order #${order.orderNumber} has been received and is being prepared.`,
     link: `/account/orders/${order._id}`,
   });
   const admins = await User.find({ role: { $in: ['admin', 'employee'] }, isActive: true }).select('_id');
@@ -229,10 +239,12 @@ export const createOrder = asyncHandler(async (req, res) => {
     link: `/admin/orders/${order._id}`,
   })));
 
-  try {
-    await sendOrderConfirmationEmail(req.user.email, order);
-  } catch {
-    // Non-fatal: order is already placed, email is best-effort.
+  if (paymentMethod !== 'cod') {
+    try {
+      await sendOrderConfirmationEmail(req.user.email, order);
+    } catch {
+      // Non-fatal: order is already placed, email is best-effort.
+    }
   }
 
   res.status(201).json({ success: true, order });
@@ -295,6 +307,9 @@ export const updateOrderStatus = asyncHandler(async (req, res) => {
   if (!order) throw ApiError.notFound('Order not found');
 
   const statusChanged = status && status !== order.status;
+  if (statusChanged && order.paymentMethod === 'cod' && status !== 'cancelled' && status !== 'pending' && order.advancePaymentStatus && order.advancePaymentStatus !== 'paid') {
+    throw ApiError.badRequest('The COD advance must be paid before this order can be fulfilled');
+  }
   if (statusChanged && status === 'cancelled') {
     const cancelled = await cancelAndReleaseOrder(order._id, note || 'Cancelled by admin');
     if (!cancelled) throw ApiError.badRequest('This order was already cancelled');
@@ -333,6 +348,10 @@ export const updateOrderStatus = asyncHandler(async (req, res) => {
   }
 
   if (statusChanged) order.status = status;
+  if (statusChanged && status === 'delivered' && order.paymentMethod === 'cod') {
+    order.codCollectedAt = new Date();
+    if (order.advancePaymentStatus === 'paid' || !order.advancePaymentStatus) order.paymentStatus = 'paid';
+  }
   if (trackingNumber) order.trackingNumber = trackingNumber;
   if (note) order.statusHistory.push({ status, note, changedAt: new Date() });
   await order.save();

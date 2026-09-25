@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
  * On success, hands the resulting paymentIntentId back to the parent so
  * it can be attached to the order creation call.
  */
-export default function StripePaymentForm({ onSuccess, submitLabel = 'Pay Now' }) {
+export default function StripePaymentForm({ onSuccess, submitLabel = 'Pay Now', returnUrl }) {
   const stripe = useStripe();
   const elements = useElements();
   const [submitting, setSubmitting] = useState(false);
@@ -19,6 +19,7 @@ export default function StripePaymentForm({ onSuccess, submitLabel = 'Pay Now' }
     setSubmitting(true);
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
+      confirmParams: { return_url: returnUrl || window.location.href },
       redirect: 'if_required',
     });
 
