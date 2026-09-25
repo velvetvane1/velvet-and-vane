@@ -42,6 +42,7 @@ const statusHistorySchema = new mongoose.Schema(
 const orderSchema = new mongoose.Schema(
   {
     orderNumber: { type: String, required: true, unique: true },
+    checkoutRequestId: { type: String, default: null, trim: true, maxlength: 100 },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     items: { type: [orderItemSchema], validate: (v) => v.length > 0 },
     shippingAddress: { type: addressSnapshotSchema, required: true },
@@ -49,10 +50,18 @@ const orderSchema = new mongoose.Schema(
     // `stripe` and its historic statuses are retained for existing orders;
     // new checkout orders use COD, JazzCash, or Easypaisa only.
     paymentMethod: { type: String, enum: ['cod', 'stripe', 'jazzcash', 'easypaisa'], required: true },
-    paymentStatus: { type: String, enum: ['pending', 'submitted', 'verified', 'rejected', 'paid', 'failed', 'refunded'], default: 'pending' },
+    paymentStatus: { type: String, enum: ['pending', 'unpaid', 'advance_pending', 'advance_paid', 'submitted', 'verified', 'rejected', 'paid', 'failed', 'refunded'], default: 'pending' },
     paymentProvider: { type: String, enum: ['jazzcash', 'easypaisa', null], default: null },
     transactionId: { type: String, default: null, trim: true, maxlength: 150 },
     stripePaymentIntentId: { type: String, default: null },
+    advancePercentage: { type: Number, enum: [10, 20], default: null },
+    advanceAmount: { type: Number, min: 0, default: null },
+    remainingAmount: { type: Number, min: 0, default: null },
+    advancePaymentStatus: { type: String, enum: ['pending', 'paid', 'failed'], default: null },
+    advancePaymentTransactionId: { type: String, default: null, trim: true, maxlength: 150 },
+    advancePaymentAttempt: { type: Number, min: 0, default: 0 },
+    advancePaidAt: { type: Date, default: null },
+    codCollectedAt: { type: Date, default: null },
     subtotal: { type: Number, required: true },
     discount: { type: Number, default: 0 },
     shippingCost: { type: Number, default: 0 },
@@ -75,6 +84,8 @@ const orderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+orderSchema.index({ user: 1, checkoutRequestId: 1 }, { unique: true, partialFilterExpression: { checkoutRequestId: { $type: 'string' } } });
 
 orderSchema.pre('save', function pushStatusHistory(next) {
   if (this.isModified('status') || this.isNew) {

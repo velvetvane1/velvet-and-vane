@@ -11,6 +11,7 @@ const siteSettingsSchema = new mongoose.Schema(
   {
     siteName: { type: String, default: 'Store', trim: true },
     currency: { type: String, default: 'PKR', trim: true, uppercase: true },
+    codAdvancePercentage: { type: Number, enum: [10, 20], default: 20 },
     whatsapp: {
       number: { type: String, default: '+923176346085', trim: true },
       prefilledMessage: {

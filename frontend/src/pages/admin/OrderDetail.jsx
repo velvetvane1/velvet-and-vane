@@ -95,6 +95,7 @@ export default function AdminOrderDetail() {
           <p>Method: <span className="capitalize text-ivory">{order.paymentMethod === 'cod' ? 'Cash on Delivery' : order.paymentMethod}</span></p>
           <p className="flex items-center gap-2">Status: <StatusBadge status={order.paymentStatus} /></p>
           {order.transactionId && <p>Transaction ID: <span className="text-gold break-all">{order.transactionId}</span></p>}
+          {order.paymentMethod === 'cod' && <><p>Order Total: <span className="text-ivory">{formatCurrency(order.total)}</span></p><p>Advance Required: <span className="text-ivory">{order.advancePercentage == null ? 'Legacy full COD' : `${order.advancePercentage}% = ${formatCurrency(order.advanceAmount)}`}</span></p><p>Advance Payment: <span className="text-ivory">{order.advancePaymentStatus || 'Not applicable (legacy order)'}</span></p><p>Remaining COD: <span className="text-ivory">{formatCurrency(order.codCollectedAt ? 0 : (order.remainingAmount ?? order.total))}</span></p>{order.codCollectedAt && <p className="text-emerald-300">Cash collected: {formatCurrency(order.remainingAmount ?? order.total)} on {new Date(order.codCollectedAt).toLocaleString()}</p>}{order.advancePaymentTransactionId && <p>Advance Transaction ID: <span className="text-gold break-all">{order.advancePaymentTransactionId}</span></p>}{order.advancePaidAt && <p>Advance Paid At: <span className="text-ivory">{new Date(order.advancePaidAt).toLocaleString()}</span></p>}</>}
         </div>
         {['jazzcash', 'easypaisa'].includes(order.paymentMethod) && <div className="mt-4 flex flex-wrap gap-2">{['pending', 'submitted', 'verified', 'rejected'].map((status) => <button key={status} disabled={paymentSaving} onClick={() => updatePayment(status)} className={`px-3 py-2 text-xs uppercase border disabled:opacity-40 ${order.paymentStatus === status ? 'bg-gold text-obsidian border-gold font-semibold' : 'border-gold/25 text-ivory/65 hover:border-gold/60'}`}>{status}</button>)}</div>}
       </div>
@@ -169,7 +170,7 @@ export default function AdminOrderDetail() {
           </button>
         </div>
 
-        {order.paymentStatus === 'paid' && order.status !== 'refunded' && (
+        {['paid', 'advance_paid'].includes(order.paymentStatus) && order.status !== 'refunded' && (
           <button onClick={handleRefund} className="text-xs text-ember-light hover:underline">
             Issue full refund
           </button>

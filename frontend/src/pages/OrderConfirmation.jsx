@@ -19,8 +19,9 @@ export default function OrderConfirmation() {
       <p className="eyebrow mb-3">Thank You</p>
       <h1 className="heading-display text-4xl mb-4">Your order is confirmed.</h1>
       <p className="text-ivory/60 mb-10">
-        Order <span className="text-gold">#{order.orderNumber}</span> has been received and is
-        being prepared. A confirmation email is on its way to you.
+        Order <span className="text-gold">#{order.orderNumber}</span> {order.paymentMethod === 'cod'
+          ? 'is confirmed as Cash on Delivery, with the remaining amount due in cash upon delivery.'
+          : 'has been received and is being prepared. A confirmation email is on its way to you.'}
       </p>
 
       <div className="glass p-6 text-left mb-10">
@@ -37,6 +38,7 @@ export default function OrderConfirmation() {
           <span>Total</span>
           <span className="text-gold">{formatCurrency(order.total, settings.currency)}</span>
         </div>
+        {order.paymentMethod === 'cod' && order.advanceAmount != null && <div className="border-t border-gold/10 pt-4 space-y-2 text-sm"><p className="flex justify-between"><span>Advance Paid ({order.advancePercentage}%)</span><span>{formatCurrency(order.advanceAmount, settings.currency)}</span></p><p className="flex justify-between"><span>Remaining COD</span><span>{formatCurrency(order.remainingAmount, settings.currency)}</span></p><p className="flex justify-between"><span>Payment Status</span><span className="capitalize text-gold">{order.paymentStatus.replaceAll('_', ' ')}</span></p></div>}
       </div>
 
       <Link

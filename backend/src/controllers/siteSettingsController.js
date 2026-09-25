@@ -34,12 +34,13 @@ function validateWallet(method, label) {
 
 export const getPaymentSettings = asyncHandler(async (req, res) => {
   const settings = await SiteSettings.getSingleton();
-  res.status(200).json({ success: true, paymentSettings: settings.paymentSettings });
+  res.status(200).json({ success: true, paymentSettings: settings.paymentSettings, codAdvancePercentage: settings.codAdvancePercentage || 20 });
 });
 
 export const updatePaymentSettings = asyncHandler(async (req, res) => {
-  const { jazzCash, easypaisa } = req.body || {};
-  if (!jazzCash && !easypaisa) throw ApiError.badRequest('Provide JazzCash or Easypaisa payment settings');
+  const { jazzCash, easypaisa, codAdvancePercentage } = req.body || {};
+  if (!jazzCash && !easypaisa && codAdvancePercentage === undefined) throw ApiError.badRequest('Provide payment settings to update');
+  if (codAdvancePercentage !== undefined && ![10, 20].includes(Number(codAdvancePercentage))) throw ApiError.badRequest('COD advance percentage must be 10% or 20%');
   const settings = await SiteSettings.getSingleton();
   const current = settings.paymentSettings?.toObject?.() || {
     jazzCash: { enabled: true, accountNumber: '', accountName: '', instructions: '' },
@@ -49,8 +50,9 @@ export const updatePaymentSettings = asyncHandler(async (req, res) => {
     jazzCash: jazzCash ? validateWallet({ ...current.jazzCash, ...jazzCash }, 'JazzCash') : current.jazzCash,
     easypaisa: easypaisa ? validateWallet({ ...current.easypaisa, ...easypaisa }, 'Easypaisa') : current.easypaisa,
   };
+  if (codAdvancePercentage !== undefined) settings.codAdvancePercentage = Number(codAdvancePercentage);
   await settings.save();
-  res.status(200).json({ success: true, paymentSettings: settings.paymentSettings });
+  res.status(200).json({ success: true, paymentSettings: settings.paymentSettings, codAdvancePercentage: settings.codAdvancePercentage });
 });
 
 export const updateSiteSettings = asyncHandler(async (req, res) => {
